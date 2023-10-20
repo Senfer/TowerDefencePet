@@ -16,7 +16,7 @@ public class SpawnerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {           
-            Instantiate(spawningInstance);
+            Instantiate(spawningInstance, transform.position, transform.rotation);
         }
     }
 }
