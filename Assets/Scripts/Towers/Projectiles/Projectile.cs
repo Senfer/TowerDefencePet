@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour, IProjectile
@@ -22,7 +23,7 @@ public class Projectile : MonoBehaviour, IProjectile
             return;
         }
 
-        if (_target == null)
+        if (_target.IsDestroyed())
         {
             Destroy(gameObject);
         }
