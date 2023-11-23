@@ -29,6 +29,11 @@ public class GameOverMenuController : MonoBehaviour
         SceneManager.LoadScene(MainMenuSceneName);
     }
 
+    private void ShowGameOverMenu()
+    {
+        SetPauseMenuCanvas(true);
+    }
+
     private void OnStateChanged(UIState previousState, UIState currentState)
     {
         _stateChangedThisFrame = true;
@@ -38,10 +43,6 @@ public class GameOverMenuController : MonoBehaviour
         }
     }
 
-    private void ShowGameOverMenu()
-    {
-        SetPauseMenuCanvas(true);
-    }
 
     private void SetPauseMenuCanvas(bool enabled)
     {

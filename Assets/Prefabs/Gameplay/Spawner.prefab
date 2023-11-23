@@ -107,8 +107,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8971841712643982460}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7fa7148422441b4d87d15acb810e989, type: 3}
+  m_Script: {fileID: 11500000, guid: dc515ef7ebc817241a94769a95090374, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawningInstance: {fileID: 2552865583136360677, guid: 0ff3935d371c1f748b93209447497e8e, type: 3}
-  spawningInstanceTarget: {fileID: 8027107048905208146, guid: ee1e010993b60cd44ab2d850a4770940, type: 3}
+  SpawningInstanceTarget: {fileID: 8027107048905208146, guid: ee1e010993b60cd44ab2d850a4770940, type: 3}

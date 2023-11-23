@@ -136,8 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ab1ea1148c3a5b459faf142fbd5a83f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objective: {fileID: 8027107048905208146, guid: ee1e010993b60cd44ab2d850a4770940, type: 3}
-  agent: {fileID: 2552865583136360679}
+  Agent: {fileID: 2552865583136360679}
 --- !u!54 &8700575030788870606
 Rigidbody:
   m_ObjectHideFlags: 0

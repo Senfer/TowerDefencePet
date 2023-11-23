@@ -1,34 +1,81 @@
 using Assets.Scripts;
+using Assets.Scripts.Gameplay.States;
 using System;
 
 public class GameplayManager : Singleton<GameplayManager>
 {
+    private GameplayState _currentState;
+
+    public WaveManager WaveManager;
     public int CurrentScore;
     public event Action<int> ScoreChanged;
 
-    // Start is called before the first frame update
-    void Start()
+    protected override void Awake()
     {
-        
+        base.Awake();
+        ChangeGameplayState(GameplayState.Building);   
     }
 
-    // Update is called once per frame
-    void Update()
+    public void StartWaves()
     {
-        
-    }
+        ChangeGameplayState(GameplayState.WavesIncoming);
+    }    
 
     public void IncreaseScore(int value)
     {
-        if (CurrentScore > 0)
+        if (_currentState == GameplayState.WavesIncoming || _currentState == GameplayState.WavesDepleted)
         {
-            CurrentScore += value;
-            ScoreChanged(CurrentScore);
+            if (CurrentScore > 0)
+            {
+                CurrentScore += value;
+                ScoreChanged(CurrentScore);
+            }
+
+            if (CurrentScore <= 0)
+            {
+                ChangeGameplayState(GameplayState.GameOver);
+            }
+        }
+    }
+
+    private void ChangeGameplayState(GameplayState state)
+    {
+        if (_currentState == state)
+        {
+            return;
         }
 
-        if (CurrentScore <= 0 && GameUIController.InstanceExists)
+        _currentState = state;
+        switch (_currentState)
         {
-            GameUIController.Instance.SetGameOver();           
+            case GameplayState.GameOver:
+                SetGameOverState();
+                break;
+            case GameplayState.WavesIncoming:
+                StartWavesInternal();
+                break;
+            default:
+                break;
         }
+    }
+
+    private void SetGameOverState()
+    {
+        if (GameUIController.InstanceExists)
+        {
+            GameUIController.Instance.SetGameOver();
+        }
+    }
+
+    private void StartWavesInternal()
+    {
+        WaveManager.WavesCompleted += OnWavesCompleted;
+        WaveManager.StartNextWave();
+    }
+
+    private void OnWavesCompleted()
+    {
+        WaveManager.WavesCompleted -= OnWavesCompleted;
+        ChangeGameplayState(GameplayState.WavesDepleted);
     }
 }

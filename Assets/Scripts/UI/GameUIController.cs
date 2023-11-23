@@ -9,6 +9,12 @@ public class GameUIController : Singleton<GameUIController>
 
     public event Action<UIState, UIState> StateChanged = delegate { };
 
+    protected override void Awake()
+    {
+        base.Awake();
+        SetState(UIState.Normal);
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
