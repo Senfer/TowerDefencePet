@@ -305,11 +305,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8027107048905208147, guid: ee1e010993b60cd44ab2d850a4770940, type: 3}
   m_PrefabInstance: {fileID: 8027107049058194276}
   m_PrefabAsset: {fileID: 0}
---- !u!223 &263141475 stripped
-Canvas:
-  m_CorrespondingSourceObject: {fileID: 5498956518021502460, guid: 89c4923bcbaf8d248be63ad4ab22bec6, type: 3}
-  m_PrefabInstance: {fileID: 5498956518161296799}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &263141476 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5498956518021502459, guid: 89c4923bcbaf8d248be63ad4ab22bec6, type: 3}
@@ -1019,11 +1014,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6025589457866736514, guid: 6a60598ffb3c0734a99bb81ea89c158b, type: 3}
   m_PrefabInstance: {fileID: 6025589456542235700}
   m_PrefabAsset: {fileID: 0}
---- !u!223 &1534920190 stripped
-Canvas:
-  m_CorrespondingSourceObject: {fileID: 6025589457866736525, guid: 6a60598ffb3c0734a99bb81ea89c158b, type: 3}
-  m_PrefabInstance: {fileID: 6025589456542235700}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1538345384
 GameObject:
   m_ObjectHideFlags: 0
@@ -1620,10 +1610,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2045234539}
     m_Modifications:
-    - target: {fileID: 208366612, guid: c681ef96d39ee7542805354e9840e05e, type: 3}
-      propertyPath: SelectableTowerGhost
-      value: 
-      objectReference: {fileID: 7718092779599659322, guid: d5db616f1086f5049aef0e410caf6674, type: 3}
     - target: {fileID: 1446314147, guid: c681ef96d39ee7542805354e9840e05e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1844,18 +1830,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2045234539}
     m_Modifications:
-    - target: {fileID: 5498956518021502458, guid: 89c4923bcbaf8d248be63ad4ab22bec6, type: 3}
-      propertyPath: MenuCanvas
-      value: 
-      objectReference: {fileID: 263141475}
-    - target: {fileID: 5498956518021502458, guid: 89c4923bcbaf8d248be63ad4ab22bec6, type: 3}
-      propertyPath: MenuUIState
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5498956518021502458, guid: 89c4923bcbaf8d248be63ad4ab22bec6, type: 3}
-      propertyPath: PauseMenuCanvas
-      value: 
-      objectReference: {fileID: 263141475}
     - target: {fileID: 5498956518021502459, guid: 89c4923bcbaf8d248be63ad4ab22bec6, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1954,53 +1928,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 2045234539}
     m_Modifications:
     - target: {fileID: 6025589457274827381, guid: 6a60598ffb3c0734a99bb81ea89c158b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6025589457274827381, guid: 6a60598ffb3c0734a99bb81ea89c158b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6025589457274827381, guid: 6a60598ffb3c0734a99bb81ea89c158b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6025589457274827381, guid: 6a60598ffb3c0734a99bb81ea89c158b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 263141477}
-    - target: {fileID: 6025589457274827381, guid: 6a60598ffb3c0734a99bb81ea89c158b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 263141477}
-    - target: {fileID: 6025589457274827381, guid: 6a60598ffb3c0734a99bb81ea89c158b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6025589457274827381, guid: 6a60598ffb3c0734a99bb81ea89c158b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: MainMenuButtonClicked
-      objectReference: {fileID: 0}
-    - target: {fileID: 6025589457274827381, guid: 6a60598ffb3c0734a99bb81ea89c158b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: MainMenuButtonClicked
-      objectReference: {fileID: 0}
-    - target: {fileID: 6025589457274827381, guid: 6a60598ffb3c0734a99bb81ea89c158b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PauseMenuController, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 6025589457274827381, guid: 6a60598ffb3c0734a99bb81ea89c158b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: PauseMenuController, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 6025589457274827381, guid: 6a60598ffb3c0734a99bb81ea89c158b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6025589457274827381, guid: 6a60598ffb3c0734a99bb81ea89c158b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 6025589457866736513, guid: 6a60598ffb3c0734a99bb81ea89c158b, type: 3}
       propertyPath: m_Name
       value: GameOverMenu
@@ -2089,18 +2019,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6025589457866736525, guid: 6a60598ffb3c0734a99bb81ea89c158b, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6025589457866736526, guid: 6a60598ffb3c0734a99bb81ea89c158b, type: 3}
-      propertyPath: MenuCanvas
-      value: 
-      objectReference: {fileID: 1534920190}
-    - target: {fileID: 6025589457866736526, guid: 6a60598ffb3c0734a99bb81ea89c158b, type: 3}
-      propertyPath: MenuUIState
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a60598ffb3c0734a99bb81ea89c158b, type: 3}
 --- !u!1001 &8027107049058194276
@@ -2110,10 +2028,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 815846804}
     m_Modifications:
-    - target: {fileID: -4603240234410774552, guid: ee1e010993b60cd44ab2d850a4770940, type: 3}
-      propertyPath: m_Radius
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8027107048905208146, guid: ee1e010993b60cd44ab2d850a4770940, type: 3}
       propertyPath: m_Name
       value: Objective
@@ -2173,10 +2087,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1864819353596375294, guid: 181340e0920667b41bff22b96f5c9a1f, type: 3}
       propertyPath: SpawningInstanceTarget
-      value: 
-      objectReference: {fileID: 153264694}
-    - target: {fileID: 1864819353596375294, guid: 181340e0920667b41bff22b96f5c9a1f, type: 3}
-      propertyPath: spawningInstanceTarget
       value: 
       objectReference: {fileID: 153264694}
     - target: {fileID: 8971841712643982460, guid: 181340e0920667b41bff22b96f5c9a1f, type: 3}
