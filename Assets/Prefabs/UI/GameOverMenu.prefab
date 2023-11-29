@@ -455,7 +455,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6025589457866736513}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7efa279a6b2e75947977e476f5c878fe, type: 3}
+  m_Script: {fileID: 11500000, guid: d32df1659aa04064ba3b48974f8d0cad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   GameOverMenuCanvas: {fileID: 6025589457866736525}

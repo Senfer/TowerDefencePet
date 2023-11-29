@@ -6,6 +6,7 @@ public class GameplayMenuController : MonoBehaviour
     private bool _stateChangedThisFrame = false;
 
     public Canvas GameplayMenuCanvas;
+
     void Start()
     {
         GameUIController.Instance.StateChanged += OnStateChanged;
@@ -36,6 +37,7 @@ public class GameplayMenuController : MonoBehaviour
             HideGameplayMenu();
         }
     }
+    
 
     private void ShowGameplayMenu()
     {

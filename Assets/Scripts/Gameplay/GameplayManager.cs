@@ -1,6 +1,7 @@
 using Assets.Scripts;
 using Assets.Scripts.Gameplay.States;
 using System;
+using UnityEngine;
 
 public class GameplayManager : Singleton<GameplayManager>
 {
@@ -8,7 +9,13 @@ public class GameplayManager : Singleton<GameplayManager>
 
     public WaveManager WaveManager;
     public int CurrentScore;
-    public event Action<int> ScoreChanged;
+    public GameObject SelectedTower;
+
+    public GameplayState CurrentState => _currentState;
+    public event Action<int> ScoreChanged = delegate { };
+    public event Action<GameplayState, GameplayState> GameplayStateChanged = delegate { };
+    public event Action TowerSelected = delegate { };
+    public event Action TowerSelectionEnded = delegate { };
 
     protected override void Awake()
     {
@@ -38,6 +45,18 @@ public class GameplayManager : Singleton<GameplayManager>
         }
     }
 
+    public void SelectTowerToBuild(GameObject selectedTower)
+    {
+        SelectedTower = selectedTower;
+        TowerSelected();
+    }
+
+    public void DeselectTower()
+    {
+        SelectedTower = null;
+        TowerSelectionEnded();
+    }
+
     private void ChangeGameplayState(GameplayState state)
     {
         if (_currentState == state)
@@ -45,14 +64,18 @@ public class GameplayManager : Singleton<GameplayManager>
             return;
         }
 
+        var previousState = _currentState;
         _currentState = state;
+        GameplayStateChanged(previousState, _currentState);
+
         switch (_currentState)
         {
             case GameplayState.GameOver:
                 SetGameOverState();
                 break;
             case GameplayState.WavesIncoming:
-                StartWavesInternal();
+                StartWavesInternal(); 
+                EnableTargeters();
                 break;
             default:
                 break;
@@ -71,6 +94,14 @@ public class GameplayManager : Singleton<GameplayManager>
     {
         WaveManager.WavesCompleted += OnWavesCompleted;
         WaveManager.StartNextWave();
+    }
+
+    private void EnableTargeters()
+    {
+        foreach (var targeter in GetComponents<Targeter>())
+        {
+            targeter.attachedCollider.enabled = true;
+        }
     }
 
     private void OnWavesCompleted()

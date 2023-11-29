@@ -110,4 +110,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc515ef7ebc817241a94769a95090374, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawningInstanceTarget: {fileID: 8027107048905208146, guid: ee1e010993b60cd44ab2d850a4770940, type: 3}
+  SpawningInstanceTarget: {fileID: 0}
