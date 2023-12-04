@@ -28,8 +28,9 @@ public class TowerSelectorButtonController : MonoBehaviour, IPointerDownHandler,
     {
         if (_isTowerSelected && _instantiatedGhost != null)
         {
-            var inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-            var ghostPosition = inputRay.GetPoint(7);
+            var camera = Camera.main;
+            var inputRay = camera.ScreenPointToRay(Input.mousePosition);
+            var ghostPosition = inputRay.GetPoint(-camera.transform.position.z);
             _instantiatedGhost.transform.position = ghostPosition;
         }
     }
