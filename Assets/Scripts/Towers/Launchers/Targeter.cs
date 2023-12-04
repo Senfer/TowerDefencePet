@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Gameplay.States;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -14,19 +15,10 @@ public class Targeter : MonoBehaviour
     private GameObject currentTarget;
     private List<GameObject> targetsInRange = new List<GameObject>();
 
-    //public float effectRadius
-    //{
-    //    get
-    //    {
-    //        var sphere = attachedCollider as SphereCollider;
-    //        if (sphere != null)
-    //        {
-    //            return sphere.radius;
-    //        }
-
-    //        return 0;
-    //    }
-    //}
+    private void Start()
+    {
+        GameplayManager.Instance.GameplayStateChanged += OnGameplayStateChanged;
+    }
 
     protected void Update()
     {
@@ -65,6 +57,7 @@ public class Targeter : MonoBehaviour
                 currentTarget = null;
             }
 
+            other.GetComponent<Damagable>().destroyed -= OnEnemyDestroyed;
             targetsInRange.Remove(other.gameObject);
 
             Debug.Log("Target removed");
@@ -76,7 +69,25 @@ public class Targeter : MonoBehaviour
         if (other.tag == "Enemy")
         {
             targetsInRange.Add(other.gameObject);
+            other.GetComponent<Damagable>().destroyed += OnEnemyDestroyed;
             Debug.Log("Target added");
+        }
+    }
+
+    private void OnEnemyDestroyed(Damagable damagable)
+    {
+        var enemy = targetsInRange.First(x => x.GetComponent<Damagable>() == damagable);
+        if (enemy != null)
+        {
+            targetsInRange.Remove(enemy);
+        }
+    }
+
+    private void OnGameplayStateChanged(GameplayState previousState, GameplayState currentState)
+    {
+        if (currentState == GameplayState.WavesIncoming)
+        {
+            attachedCollider.enabled = true;
         }
     }
 }

@@ -75,7 +75,6 @@ public class GameplayManager : Singleton<GameplayManager>
                 break;
             case GameplayState.WavesIncoming:
                 StartWavesInternal(); 
-                EnableTargeters();
                 break;
             default:
                 break;
@@ -94,14 +93,6 @@ public class GameplayManager : Singleton<GameplayManager>
     {
         WaveManager.WavesCompleted += OnWavesCompleted;
         WaveManager.StartNextWave();
-    }
-
-    private void EnableTargeters()
-    {
-        foreach (var targeter in GetComponents<Targeter>())
-        {
-            targeter.attachedCollider.enabled = true;
-        }
     }
 
     private void OnWavesCompleted()
