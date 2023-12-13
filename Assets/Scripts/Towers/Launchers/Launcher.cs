@@ -5,6 +5,9 @@ public class Launcher : MonoBehaviour
     public GameObject projectilePrefab;
     public Targeter targeter;
 
+    [SerializeField]
+    public TowerData towerData;
+
     void Start()
     {
         targeter.acquiredTarget += OnAcquiredTarget;

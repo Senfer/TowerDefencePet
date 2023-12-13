@@ -1,4 +1,6 @@
 using Assets.Scripts;
+using Assets.Scripts.Gameplay.Enemy;
+using Assets.Scripts.Gameplay.Level;
 using Assets.Scripts.Gameplay.States;
 using System;
 using UnityEngine;
@@ -6,8 +8,10 @@ using UnityEngine;
 public class GameplayManager : Singleton<GameplayManager>
 {
     private GameplayState _currentState;
+    private int _enemiesCount;
 
     public WaveManager WaveManager;
+    public PlayerWalletManager WalletManager;
     public int CurrentScore;
     public GameObject SelectedTower;
 
@@ -26,23 +30,6 @@ public class GameplayManager : Singleton<GameplayManager>
     public void StartWaves()
     {
         ChangeGameplayState(GameplayState.WavesIncoming);
-    }    
-
-    public void IncreaseScore(int value)
-    {
-        if (_currentState == GameplayState.WavesIncoming || _currentState == GameplayState.WavesDepleted)
-        {
-            if (CurrentScore > 0)
-            {
-                CurrentScore += value;
-                ScoreChanged(CurrentScore);
-            }
-
-            if (CurrentScore <= 0)
-            {
-                ChangeGameplayState(GameplayState.GameOver);
-            }
-        }
     }
 
     public void SelectTowerToBuild(GameObject selectedTower)
@@ -55,6 +42,33 @@ public class GameplayManager : Singleton<GameplayManager>
     {
         SelectedTower = null;
         TowerSelectionEnded();
+    }
+
+    public void EnemyDestroyedCallback(EnemyController enemy)
+    {
+        if (enemy.State == EnemyStates.Dead)
+        {
+            WalletManager.IncreaseCurrency(enemy.Reward);
+        }
+        if (enemy.State == EnemyStates.ReachedObjective)
+        {
+            DecreaseScore(enemy.Damage);
+        }
+
+        _enemiesCount--;
+
+        if (_enemiesCount == 0 && CurrentState == GameplayState.WavesIncoming)
+        {
+            if (WaveManager.State == WaveManagerState.WaveIsOver)
+            {
+                ChangeGameplayState(GameplayState.Building);
+            }
+
+            if (WaveManager.State == WaveManagerState.WavesDepleted)
+            {
+                ChangeGameplayState(GameplayState.GameOver);
+            }
+        }
     }
 
     private void ChangeGameplayState(GameplayState state)
@@ -92,12 +106,53 @@ public class GameplayManager : Singleton<GameplayManager>
     private void StartWavesInternal()
     {
         WaveManager.WavesCompleted += OnWavesCompleted;
+        WaveManager.CurrentWaveCompleted += OnCurrentWaveCompleted;
+        WaveManager.EnemySpawned += OnEnemySpawned;
         WaveManager.StartNextWave();
+    }
+
+    private void OnCurrentWaveCompleted()
+    {
+        WaveManager.CurrentWaveCompleted -= OnCurrentWaveCompleted;
+        WaveManager.EnemySpawned -= OnEnemySpawned;
     }
 
     private void OnWavesCompleted()
     {
         WaveManager.WavesCompleted -= OnWavesCompleted;
-        ChangeGameplayState(GameplayState.WavesDepleted);
+    }
+
+    private void OnEnemySpawned()
+    {
+        _enemiesCount++;
+    }
+
+    private void IncreaseScore(int value)
+    {
+        if (_currentState == GameplayState.WavesIncoming || WaveManager.State != WaveManagerState.Undefined)
+        {
+            if (CurrentScore > 0)
+            {
+                CurrentScore += value;
+                ScoreChanged(CurrentScore);
+            }
+        }
+    }
+
+    private void DecreaseScore(int value)
+    {
+        if (_currentState == GameplayState.WavesIncoming || WaveManager.State != WaveManagerState.Undefined)
+        {
+            if (CurrentScore > 0)
+            {
+                CurrentScore -= value;
+                ScoreChanged(CurrentScore);
+            }
+
+            if (CurrentScore <= 0)
+            {
+                ChangeGameplayState(GameplayState.GameOver);
+            }
+        }
     }
 }

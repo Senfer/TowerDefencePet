@@ -6,8 +6,7 @@ public class ObjectiveController : MonoBehaviour
     {
         if (other.tag == "Enemy")
         {
-            Destroy(other.gameObject);
-            GameplayManager.Instance.IncreaseScore(-10);
+            other.gameObject.GetComponent<EnemyController>().ReachObjective();
         }
     }
 }

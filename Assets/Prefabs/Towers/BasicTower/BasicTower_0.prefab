@@ -1090,6 +1090,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 7509678890979269900, guid: 8b474fbdb0fa431478c6d0564ff6f6b2, type: 3}
   targeter: {fileID: 252123893251597533}
+  towerData:
+    cost: 90
+    sell: 0
 --- !u!1 &7718092779599659324
 GameObject:
   m_ObjectHideFlags: 0

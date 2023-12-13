@@ -57,7 +57,7 @@ public class Targeter : MonoBehaviour
                 currentTarget = null;
             }
 
-            other.GetComponent<Damagable>().destroyed -= OnEnemyDestroyed;
+            other.GetComponent<Damageable>().HealthDepleted -= OnEnemyDestroyed;
             targetsInRange.Remove(other.gameObject);
 
             Debug.Log("Target removed");
@@ -69,14 +69,14 @@ public class Targeter : MonoBehaviour
         if (other.tag == "Enemy")
         {
             targetsInRange.Add(other.gameObject);
-            other.GetComponent<Damagable>().destroyed += OnEnemyDestroyed;
+            other.GetComponent<Damageable>().HealthDepleted += OnEnemyDestroyed;
             Debug.Log("Target added");
         }
     }
 
-    private void OnEnemyDestroyed(Damagable damagable)
+    private void OnEnemyDestroyed(Damageable damagable)
     {
-        var enemy = targetsInRange.First(x => x.GetComponent<Damagable>() == damagable);
+        var enemy = targetsInRange.First(x => x.GetComponent<Damageable>() == damagable);
         if (enemy != null)
         {
             targetsInRange.Remove(enemy);
@@ -85,9 +85,14 @@ public class Targeter : MonoBehaviour
 
     private void OnGameplayStateChanged(GameplayState previousState, GameplayState currentState)
     {
-        if (currentState == GameplayState.WavesIncoming)
+        switch (currentState)
         {
-            attachedCollider.enabled = true;
+            case GameplayState.WavesIncoming:
+                attachedCollider.enabled = true;
+                break;
+            case GameplayState.Building:
+                attachedCollider.enabled = false;
+                break;
         }
     }
 }

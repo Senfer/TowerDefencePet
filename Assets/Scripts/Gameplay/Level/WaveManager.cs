@@ -9,28 +9,57 @@ public class WaveManager : MonoBehaviour
     private Wave _currentWave => _waveIterator.Current;
 
     public List<Wave> ConfiguredEnemyWaves;
-    public event Action WavesCompleted;
+    public int CurrentWaveNumber;
+    public WaveManagerState State;
 
-    public void Awake()
+    public event Action WavesCompleted;
+    public event Action CurrentWaveCompleted;
+    public event Action EnemySpawned;
+
+    void Awake()
     {
         _waveIterator = ConfiguredEnemyWaves.GetEnumerator();
     }
 
+    void Start()
+    {
+        if (ConfiguredEnemyWaves.Count > 0)
+        {
+            _waveIterator.MoveNext();
+        }
+    }
+
     public void StartNextWave()
     {
-        if (_waveIterator.MoveNext())
+        if (ConfiguredEnemyWaves.Count == 0)
         {
-            _currentWave.StartWave();
-            _currentWave.WaveFinished += OnWaveFinished;
+            WavesCompleted();
             return;
         }
 
-        WavesCompleted();
+        State = WaveManagerState.WaveIncoming;
+
+        _currentWave.StartWave();
+        _currentWave.WaveFinished += OnWaveFinished;
+        _currentWave.EnemySpawned += OnEnemySpawned;
+        CurrentWaveNumber++;
     }
 
     private void OnWaveFinished()
     {
+        State = WaveManagerState.WaveIsOver;
         _currentWave.WaveFinished -= OnWaveFinished;
-        StartNextWave();
+        _currentWave.EnemySpawned -= OnEnemySpawned;
+        CurrentWaveCompleted();
+        if (!_waveIterator.MoveNext())
+        {
+            State = WaveManagerState.WavesDepleted;
+            WavesCompleted();
+        }
+    }
+
+    private void OnEnemySpawned()
+    {
+        EnemySpawned();
     }
 }

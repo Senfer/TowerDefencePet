@@ -15,6 +15,7 @@ namespace Assets.Scripts.Gameplay.Level
         public SpawnerController WaveSpawner;
 
         public event Action WaveFinished;
+        public event Action EnemySpawned;
 
         public void StartWave()
         {
@@ -51,6 +52,7 @@ namespace Assets.Scripts.Gameplay.Level
         private void SpawnCurrent()
         {
             WaveSpawner.SpawnEntity(_spawnConfigsIterator.Current.SpawningEntity);
+            EnemySpawned();
         }
     }
 }

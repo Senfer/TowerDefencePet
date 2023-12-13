@@ -114,6 +114,7 @@ MonoBehaviour:
   PlacingColor: {r: 0.27959073, g: 1, b: 0, a: 0}
   NormalColor: {r: 0.48235294, g: 0.4745098, b: 0.4745098, a: 0}
   OccupiedColor: {r: 0.109803915, g: 0.39607844, b: 1, a: 0}
+  PlacingInvalidColor: {r: 1, g: 0, b: 0, a: 0}
   AreaMesh: {fileID: 7997238376180782045}
   IsOccupied: 0
   ReadyForPlacement: 0

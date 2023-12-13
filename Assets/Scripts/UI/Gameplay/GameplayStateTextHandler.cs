@@ -28,8 +28,8 @@ public class GameplayStateTextHandler : MonoBehaviour
             case GameplayState.WavesIncoming:
                 SetGameplayStateText("Enemies incoming");
                 break;
-            case GameplayState.WavesDepleted:
-                SetGameplayStateText("All enemies spawned");
+            case GameplayState.Win:
+                SetGameplayStateText("You have won");
                 break;
             default:
                 SetGameplayStateText(string.Empty);

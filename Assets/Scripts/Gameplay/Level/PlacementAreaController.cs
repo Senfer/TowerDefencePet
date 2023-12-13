@@ -9,6 +9,7 @@ public class PlacementAreaController : MonoBehaviour
     public Color PlacingColor;
     public Color NormalColor;
     public Color OccupiedColor;
+    public Color PlacingInvalidColor;
 
     public MeshRenderer AreaMesh;
 
@@ -48,10 +49,17 @@ public class PlacementAreaController : MonoBehaviour
         {
             if (GameplayManager.Instance.SelectedTower != null && !IsOccupied)
             {
-                AreaMesh.material.color = PlacingColor;
-                if (Input.GetMouseButtonUp(0) && GameUIController.InstanceExists)
+                if (IsPlacingValid(GameplayManager.Instance.SelectedTower))
                 {
-                    OccupyPlacement();
+                    AreaMesh.material.color = PlacingColor;
+                    if (Input.GetMouseButtonUp(0) && GameUIController.InstanceExists)
+                    {
+                        OccupyPlacement();
+                    }
+                }
+                else
+                {
+                    AreaMesh.material.color = PlacingInvalidColor;
                 }
             }
         }
@@ -84,9 +92,16 @@ public class PlacementAreaController : MonoBehaviour
     private void OccupyPlacement()
     {
         var towerInstance = GameplayManager.Instance.SelectedTower;
+        var towerCost = towerInstance.GetComponent<Launcher>().towerData.cost;
         Instantiate(towerInstance, transform);
         AreaMesh.material.color = OccupiedColor;
         IsOccupied = true;
         _isHighlighted = false;
+        GameplayManager.Instance.WalletManager.DecreaseCurrency(towerCost);
+    }
+
+    private bool IsPlacingValid(GameObject tower)
+    {
+        return GameplayManager.Instance.WalletManager.CurrencyAmount > tower.GetComponent<Launcher>().towerData.cost;
     }
 }

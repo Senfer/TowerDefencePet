@@ -5,7 +5,6 @@
         Pause,
         Building,
         WavesIncoming,
-        WavesDepleted,
         Win,
         GameOver,
     }

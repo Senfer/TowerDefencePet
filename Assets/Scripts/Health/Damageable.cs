@@ -1,11 +1,11 @@
 ﻿using System;
 using UnityEngine;
 
-public class Damagable : MonoBehaviour, IDamagable
+public class Damageable : MonoBehaviour, IDamageable
 {
     public int health;
 
-    public event Action<Damagable> destroyed = delegate { };
+    public event Action<Damageable> HealthDepleted = delegate { };
 
     public void TakeDamage(int damage)
     {
@@ -13,7 +13,7 @@ public class Damagable : MonoBehaviour, IDamagable
         health -= damage;
         if (health <= 0)
         {
-            destroyed(this);
+            HealthDepleted(this);
             Destroy(gameObject);
         }
     }

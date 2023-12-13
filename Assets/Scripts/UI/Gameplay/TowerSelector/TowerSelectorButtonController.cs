@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Gameplay.States;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -7,12 +8,17 @@ public class TowerSelectorButtonController : MonoBehaviour, IPointerDownHandler,
 {
     private bool _isTowerSelected;
     private bool _isEnabled;
+    private bool _isInsufficientFunds;
     private GameplayManager _gameplayManagerInstance;
+    private PlayerWalletManager _playerWalletManager;
     private GameObject _instantiatedGhost;
+    private int _towerCost;
 
     public GameObject SelectableTower;
     public GameObject SelectableTowerGhost;
     public Button SelectTowerButton;
+    public Color InsufficientFundsColor;
+    public string TowerTitleFormatWithCost;
 
     public void Start()
     {
@@ -21,7 +27,18 @@ public class TowerSelectorButtonController : MonoBehaviour, IPointerDownHandler,
             _gameplayManagerInstance = GameplayManager.Instance;
             _gameplayManagerInstance.GameplayStateChanged += OnStateChanged;
             SetComponentsEnabled(_gameplayManagerInstance.CurrentState == GameplayState.Building);
+            _playerWalletManager = _gameplayManagerInstance.WalletManager;
+            _playerWalletManager.CurrencyAmountChanged += OnCurrencyAmountChanged;
         }
+
+        _towerCost = SelectableTower.GetComponent<Launcher>().towerData.cost;
+        SelectTowerButton.GetComponentInChildren<TextMeshProUGUI>().text = string.Format(TowerTitleFormatWithCost, _towerCost);
+    }
+
+    private void OnDestroy()
+    {
+        _gameplayManagerInstance.GameplayStateChanged -= OnStateChanged;
+        _playerWalletManager.CurrencyAmountChanged -= OnCurrencyAmountChanged;
     }
 
     public void Update()
@@ -44,10 +61,7 @@ public class TowerSelectorButtonController : MonoBehaviour, IPointerDownHandler,
     }
     public void OnPointerUp(PointerEventData eventData)
     {
-        if (_isEnabled)
-        {
-            DeselectTower();
-        }
+        DeselectTower();
     }
 
     private void SelectTower()
@@ -82,6 +96,27 @@ public class TowerSelectorButtonController : MonoBehaviour, IPointerDownHandler,
     {
         _isEnabled = isEnabled;
         SelectTowerButton.interactable = isEnabled;
+    }
+
+    private void OnCurrencyAmountChanged(int previousAmount, int currentAmount)
+    {
+        var buttonImage = SelectTowerButton.GetComponent<Image>();
+        if (_towerCost > currentAmount)
+        {
+            _isInsufficientFunds = true;
+            SetComponentsEnabled(false);
+            buttonImage.color = InsufficientFundsColor;
+        }
+
+        if (_towerCost < currentAmount)
+        {
+            _isInsufficientFunds = false;
+            buttonImage.color = SelectTowerButton.colors.normalColor;
+            if (GameplayManager.Instance.CurrentState == GameplayState.Building)
+            {
+                SetComponentsEnabled(true);
+            }
+        }
     }
 }
 

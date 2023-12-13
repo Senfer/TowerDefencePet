@@ -1,7 +1,8 @@
+using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "TowerData.asset", menuName = "TowerDefensePet/TowerConfiguration", order = 1)]
-public class TowerData : ScriptableObject
+[Serializable]
+public class TowerData
 {
     public int cost;
 

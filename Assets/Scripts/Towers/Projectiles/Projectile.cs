@@ -27,8 +27,10 @@ public class Projectile : MonoBehaviour, IProjectile
         {
             Destroy(gameObject);
         }
-
-        transform.position = Vector3.MoveTowards(transform.position, _target.transform.position, speed * Time.deltaTime);
+        else
+        {
+            transform.position = Vector3.MoveTowards(transform.position, _target.transform.position, speed * Time.deltaTime);
+        }
     }
 
     public void Fire(Vector3 startPoint, GameObject target)
@@ -42,7 +44,7 @@ public class Projectile : MonoBehaviour, IProjectile
     {
         if (other.tag == "Enemy")
         {
-            other.GetComponent<Damagable>().TakeDamage(damage);
+            other.GetComponent<Damageable>().TakeDamage(damage);
             Destroy(gameObject);
         }
     }
