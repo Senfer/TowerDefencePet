@@ -1713,34 +1713,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2045234539}
     m_Modifications:
-    - target: {fileID: 208366609, guid: c681ef96d39ee7542805354e9840e05e, type: 3}
-      propertyPath: m_Colors.m_DisabledColor.a
-      value: 0.8235294
-      objectReference: {fileID: 0}
-    - target: {fileID: 208366612, guid: c681ef96d39ee7542805354e9840e05e, type: 3}
-      propertyPath: TowerTitleFormat
-      value: 'Basic Tower: {0}'
-      objectReference: {fileID: 0}
     - target: {fileID: 1446314147, guid: c681ef96d39ee7542805354e9840e05e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 462337081}
-    - target: {fileID: 323348196219094738, guid: c681ef96d39ee7542805354e9840e05e, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 350
-      objectReference: {fileID: 0}
-    - target: {fileID: 323348196219094738, guid: c681ef96d39ee7542805354e9840e05e, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 323348196219094738, guid: c681ef96d39ee7542805354e9840e05e, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -225
-      objectReference: {fileID: 0}
-    - target: {fileID: 323348196488938315, guid: c681ef96d39ee7542805354e9840e05e, type: 3}
-      propertyPath: m_text
-      value: Start wave
-      objectReference: {fileID: 0}
     - target: {fileID: 323348196593203505, guid: c681ef96d39ee7542805354e9840e05e, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
